@@ -188,11 +188,11 @@ const ProjectDetail: React.FC = () => {
                     <h3 className="text-[17px] font-bold text-slate-900 mb-5 tracking-tight">Screenshots</h3>
                     <div className="flex overflow-x-auto gap-4 no-scrollbar -mx-6 px-6">
                         {'screenshots' in project && (project as any).screenshots?.length > 0 ? (project as any).screenshots.map((ss: string, idx: number) => (
-                            <div key={idx} className="min-w-[200px] aspect-[9/18] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm">
-                                <img src={ss} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                            <div key={idx} className="h-80 min-w-[200px] flex-shrink-0 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm flex items-center justify-center p-2">
+                                <img src={ss} alt={`Screenshot ${idx + 1}`} className="max-h-full max-w-full w-auto object-contain rounded-xl" />
                             </div>
                         )) : (
-                            <div className="min-w-[200px] aspect-[9/18] rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 text-xs italic border border-dashed border-slate-300">
+                            <div className="h-80 min-w-[200px] aspect-[9/18] rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 text-xs italic border border-dashed border-slate-300">
                                 Screenshots coming soon
                             </div>
                         )}

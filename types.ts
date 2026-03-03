@@ -9,7 +9,7 @@ export interface MainProject {
   title: string;
   description: string;
   fullDescription: string;
-  responsibilities: string[];
+  responsibilities?: string[];
   screenshots: string[];
   icon: string;
   iconBg: string;

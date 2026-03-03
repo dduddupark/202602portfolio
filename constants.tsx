@@ -61,25 +61,42 @@ export const MAIN_PROJECTS: MainProject[] = [
   },
   {
     id: '2',
-    title: 'FitFlow Analytics',
-    description: 'Advanced biometric tracking with WearOS integration.',
-    fullDescription: 'A comprehensive fitness tracking solution that integrates deeply with WearOS devices. FitFlow provides real-time biometric analysis and long-term health trends using advanced data visualization techniques and on-device machine learning.',
-    responsibilities: [
-      'Developed native WearOS tiles and complications using Wear Health Services.',
-      'Integrated Google Health Connect for centralized health data management.',
-      'Built custom data visualization components using Canvas API in Compose.',
-      'Implemented background processing for continuous heart rate monitoring.'
+    title: '민병철유폰 (U-Phone)',
+    description: '외국인강사와 전화영어 수업을 체험하고 강약점 분석리포트 및 전문 학습 컨설팅 어플',
+    fullDescription: '외국인강사와 전화영어 수업을 체험하고 강약점 분석리포트 및 전문 학습 컨설팅 어플',
+
+    libraries: [
+      'Java, Kotlin',
+      'Amazon Chime',
+      'Dagger Hilt',
+      'AppsFlyer',
+      'Coroutine',
+      'MVVM Architecture',
+      'Databinding, LiveData'
     ],
+    newDevelopmentExperience: [
+      '안드로이드 기반 하이브리드 앱 개발',
+      '기존 HttpConnection으로 서버처리를 했던 부분을 Clean Architecture 적용 및 Coroutine으로 Refactoring',
+      '영작 문장 첨삭 화면을 위한 MarkDown 기능 구현',
+      'SpeechAce 기능을 사용하여 실시간 발음교정기능 구현',
+      'WebRTC를 이용한 보이스콜/페이스콜 기능 구현, 백그라운드/앱 종료시에서도 전화 기능 구현\n  · 잠금화면 위에서 앱화면이 뜨는 기능 구현\n  · Push 진입시 디바이스 OS별 전화 벨소리 및 진동 기능 구현\n  · 학생 수업 스타일에 맞는 보이스콜/페이스콜 화면 구현'
+    ],
+    storeUrl: 'https://play.google.com/store/apps/details?id=com.bcm.uphone3.android', // 주소 변경이 필요합니다
+    heroImage: '/uphone/uphone_main.webp',
     screenshots: [
-      'https://picsum.photos/seed/ff1/400/800',
-      'https://picsum.photos/seed/ff2/400/800'
+      '/uphone/uphone_1.webp',
+      '/uphone/uphone_2.png',
+      '/uphone/uphone_3.png',
+      '/uphone/uphone_4.png',
+      '/uphone/uphone_5.png',
     ],
-    icon: 'fitness_center',
-    iconBg: 'bg-indigo-600',
+    icon: '/uphone/uphone_logo.webp',
+    iconBg: 'bg-green-600',
     technologies: [
-      { name: 'COROUTINES', colorClass: 'bg-indigo-500/10 text-indigo-600' },
-      { name: 'RETROFIT', colorClass: 'bg-orange-500/10 text-orange-600' },
-      { name: 'WEAROS', colorClass: 'bg-pink-500/10 text-pink-600' }
+      { name: 'KOTLIN', colorClass: 'bg-blue-500/10 text-blue-600' },
+      { name: 'COROUTINE', colorClass: 'bg-indigo-500/10 text-indigo-600' },
+      { name: 'MVVM', colorClass: 'bg-orange-500/10 text-orange-600' },
+      { name: 'HILT', colorClass: 'bg-red-500/10 text-red-600' }
     ]
   }
 ];

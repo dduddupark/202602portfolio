@@ -25,14 +25,16 @@ const MainProjects: React.FC = () => {
                 )}
               </div>
               <div className="flex gap-2">
-                <a
-                  href="https://play.google.com/store"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-full text-slate-600 hover:bg-slate-100 transition-colors"
-                >
-                  <span className="material-icons-round text-xl">shop</span>
-                </a>
+                {'storeUrl' in project && project.storeUrl && (
+                  <a
+                    href={project.storeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 flex items-center justify-center bg-slate-50 rounded-full text-slate-600 hover:bg-slate-100 transition-colors"
+                  >
+                    <span className="material-icons-round text-xl">shop</span>
+                  </a>
+                )}
                 <Link
                   to={`/project/${project.id}?origin=main`}
                   className="w-10 h-10 flex items-center justify-center bg-primary rounded-full text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all active:scale-95"
