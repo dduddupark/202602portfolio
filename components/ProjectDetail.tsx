@@ -29,7 +29,7 @@ const ProjectDetail: React.FC = () => {
     return (
         <div className="bg-background min-h-screen flex flex-col relative pb-32">
             {/* Header / Hero Illustration Area */}
-            <div className="h-72 bg-gradient-to-br from-[#E8C291] to-[#D4A373] relative overflow-hidden flex items-end justify-center">
+            <div className="h-72 bg-slate-200 relative overflow-hidden flex items-end justify-center">
                 <Link
                     to="/"
                     className="absolute top-6 left-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white z-20"
@@ -48,13 +48,12 @@ const ProjectDetail: React.FC = () => {
                     </a>
                 )}
                 {project.heroImage ? (
-                    <div className="absolute inset-0 w-full h-full">
+                    <div className="absolute inset-0 w-full h-full p-6">
                         <img
                             src={project.heroImage}
                             alt={project.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain drop-shadow-lg"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     </div>
                 ) : (
                     <div className="w-48 h-56 bg-white/10 rounded-t-full relative -bottom-4 overflow-hidden border-t-4 border-white/20">
@@ -100,10 +99,20 @@ const ProjectDetail: React.FC = () => {
                     </div>
                 </section>
 
-                {/* About Project */}
-                <section>
-                    <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">About Project</h3>
-                    {'keyFeatures' in project && (project as any).keyFeatures ? (
+                {/* Full Description */}
+                {'fullDescription' in project && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">서비스 소개</h3>
+                        <p className="text-slate-500 text-sm leading-relaxed whitespace-pre-line">
+                            {(project as any).fullDescription}
+                        </p>
+                    </section>
+                )}
+
+                {/* Key Features (Other Projects) */}
+                {'keyFeatures' in project && (project as any).keyFeatures && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">주요 기능</h3>
                         <ul className="space-y-3">
                             {(project as any).keyFeatures.map((feature: string, idx: number) => (
                                 <li key={idx} className="flex gap-3">
@@ -112,12 +121,67 @@ const ProjectDetail: React.FC = () => {
                                 </li>
                             ))}
                         </ul>
-                    ) : (
-                        <p className="text-slate-500 text-sm leading-relaxed">
-                            {'fullDescription' in project ? (project as any).fullDescription : project.description}
-                        </p>
-                    )}
-                </section>
+                    </section>
+                )}
+
+                {/* Libraries / Technologies details (Main Projects) */}
+                {'libraries' in project && (project as any).libraries && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">기능 / 라이브러리</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {(project as any).libraries.map((lib: string, idx: number) => (
+                                <span key={idx} className="px-3 py-1.5 bg-slate-100 text-slate-600 text-[11px] font-bold rounded-lg border border-slate-200">
+                                    {lib}
+                                </span>
+                            ))}
+                        </div>
+                    </section>
+                )}
+
+                {/* Maintenance Experience (Main Projects) */}
+                {'maintenanceExperience' in project && (project as any).maintenanceExperience && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">개선 및 유지보수 주요 경험</h3>
+                        <ul className="space-y-3">
+                            {(project as any).maintenanceExperience.map((exp: string, idx: number) => (
+                                <li key={idx} className="flex gap-3">
+                                    <span className="material-icons-round text-primary text-sm mt-0.5">build</span>
+                                    <p className="text-slate-500 text-sm leading-relaxed">{exp}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {/* New Development Experience (Main Projects) */}
+                {'newDevelopmentExperience' in project && (project as any).newDevelopmentExperience && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">신규 개발 주요 경험</h3>
+                        <ul className="space-y-3">
+                            {(project as any).newDevelopmentExperience.map((exp: string, idx: number) => (
+                                <li key={idx} className="flex gap-3">
+                                    <span className="material-icons-round text-primary text-sm mt-0.5">add_circle</span>
+                                    <p className="text-slate-500 text-sm leading-relaxed">{exp}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                {/* Responsibilities (Fallback for older main projects) */}
+                {'responsibilities' in project && (project as any).responsibilities && !('maintenanceExperience' in project) && (
+                    <section>
+                        <h3 className="text-[17px] font-bold text-slate-900 mb-4 tracking-tight">Responsibilities</h3>
+                        <ul className="space-y-3">
+                            {(project as any).responsibilities.map((resp: string, idx: number) => (
+                                <li key={idx} className="flex gap-3">
+                                    <span className="material-icons-round text-primary text-sm mt-0.5">check_circle</span>
+                                    <p className="text-slate-500 text-sm leading-relaxed">{resp}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
 
                 {/* Screenshots */}
                 <section className="pb-10">
@@ -136,27 +200,39 @@ const ProjectDetail: React.FC = () => {
                 </section>
             </div>
 
-            {/* Bottom Bar - Only visible if origin is NOT 'main' */}
-            {!isMainOrigin && (
+            {/* Bottom Bar */}
+            {isMainOrigin && 'storeUrl' in project && (project as any).storeUrl ? (
+                <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 py-6 bg-slate-900 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] z-50">
+                    <a
+                        href={(project as any).storeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full flex items-center justify-center gap-2 text-white font-bold py-3 uppercase tracking-widest text-xs active:scale-95 transition-transform bg-primary/20 rounded-xl"
+                    >
+                        <span className="material-icons-round text-lg">shop</span>
+                        View on Google Store
+                    </a>
+                </div>
+            ) : !isMainOrigin ? (
                 <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-6 py-6 bg-slate-900 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] z-50">
                     {'githubUrl' in project && (project as any).githubUrl ? (
                         <a
                             href={(project as any).githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full flex items-center justify-center gap-2 text-white font-bold py-3 uppercase tracking-widest text-xs active:scale-95 transition-transform"
+                            className="w-full flex items-center justify-center gap-2 text-white font-bold py-3 uppercase tracking-widest text-xs active:scale-95 transition-transform bg-white/10 rounded-xl hover:bg-white/20"
                         >
                             <span className="material-icons-round text-lg">code</span>
                             View on Github
                         </a>
                     ) : (
-                        <button className="w-full flex items-center justify-center gap-2 text-white font-bold py-3 uppercase tracking-widest text-xs active:scale-95 transition-transform">
+                        <button className="w-full flex items-center justify-center gap-2 text-slate-500 font-bold py-3 uppercase tracking-widest text-xs active:scale-95 transition-transform bg-white/5 rounded-xl cursor-not-allowed">
                             <span className="material-icons-round text-lg">code</span>
-                            View on Github
+                            Private Repository
                         </button>
                     )}
                 </div>
-            )}
+            ) : null}
         </div>
     );
 };

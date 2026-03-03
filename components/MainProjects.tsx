@@ -17,8 +17,12 @@ const MainProjects: React.FC = () => {
             className="min-w-[280px] max-w-[280px] bg-white rounded-2xl p-5 shadow-sm border border-slate-100/50"
           >
             <div className="flex justify-between items-start mb-5">
-              <div className={`w-14 h-14 ${project.iconBg} rounded-xl flex items-center justify-center text-white shadow-inner`}>
-                <span className="material-icons-round text-3xl">{project.icon}</span>
+              <div className={`w-14 h-14 ${project.iconBg} rounded-xl flex items-center justify-center text-white shadow-inner overflow-hidden`}>
+                {project.icon.startsWith('/') || project.icon.startsWith('http') ? (
+                  <img src={project.icon} alt={project.title} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="material-icons-round text-3xl">{project.icon}</span>
+                )}
               </div>
               <div className="flex gap-2">
                 <a

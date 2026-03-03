@@ -15,6 +15,10 @@ export interface MainProject {
   iconBg: string;
   technologies: Technology[];
   heroImage?: string;
+  storeUrl?: string;
+  libraries?: string[];
+  maintenanceExperience?: string[];
+  newDevelopmentExperience?: string[];
 }
 
 export interface Skill {

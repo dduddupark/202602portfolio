@@ -14,8 +14,12 @@ const OtherProjects: React.FC = () => {
             to={`/project/${project.id}?origin=other`}
             className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-100/50 shadow-sm active:bg-slate-50 transition-colors cursor-pointer"
           >
-            <div className="w-12 h-12 bg-slate-100/60 rounded-xl flex items-center justify-center">
-              <span className="material-icons-round text-slate-400 text-2xl">{project.icon}</span>
+            <div className="w-12 h-12 bg-slate-100/60 rounded-xl flex items-center justify-center overflow-hidden">
+              {project.icon.startsWith('/') || project.icon.startsWith('http') ? (
+                <img src={project.icon} alt={project.title} className="w-full h-full object-cover" />
+              ) : (
+                <span className="material-icons-round text-slate-400 text-2xl">{project.icon}</span>
+              )}
             </div>
 
             <div className="flex-1 min-w-0">
