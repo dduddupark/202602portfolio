@@ -6,8 +6,8 @@ import { AI_SYSTEM_INSTRUCTION } from '../constants';
 const AiAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<{role: 'user' | 'ai', text: string}[]>([
-    { role: 'ai', text: 'Hi! I\'m Alex\'s AI assistant. Ask me anything about his work!' }
+  const [messages, setMessages] = useState<{ role: 'user' | 'ai', text: string }[]>([
+    { role: 'ai', text: 'Hi! I\'m Suyeon\'s AI assistant. Ask me anything about my work!' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -31,9 +31,9 @@ const AiAssistant: React.FC = () => {
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: [...messages.map(m => ({
-            role: m.role === 'user' ? 'user' : 'model',
-            parts: [{text: m.text}]
-        })), { role: 'user', parts: [{text: userMessage}] }],
+          role: m.role === 'user' ? 'user' : 'model',
+          parts: [{ text: m.text }]
+        })), { role: 'user', parts: [{ text: userMessage }] }],
         config: {
           systemInstruction: AI_SYSTEM_INSTRUCTION,
           maxOutputTokens: 150,
@@ -52,7 +52,7 @@ const AiAssistant: React.FC = () => {
   return (
     <>
       {/* Floating Action Button */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-24 right-6 z-[70] w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform"
       >
@@ -72,17 +72,16 @@ const AiAssistant: React.FC = () => {
             </div>
           </div>
 
-          <div 
+          <div
             ref={scrollRef}
             className="h-80 overflow-y-auto p-4 space-y-4 no-scrollbar bg-slate-50/50"
           >
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-3 rounded-2xl text-xs leading-relaxed shadow-sm ${
-                  m.role === 'user' 
-                    ? 'bg-primary text-white rounded-tr-none' 
+                <div className={`max-w-[85%] p-3 rounded-2xl text-xs leading-relaxed shadow-sm ${m.role === 'user'
+                    ? 'bg-primary text-white rounded-tr-none'
                     : 'bg-white text-slate-700 rounded-tl-none border border-slate-100'
-                }`}>
+                  }`}>
                   {m.text}
                 </div>
               </div>
@@ -99,15 +98,15 @@ const AiAssistant: React.FC = () => {
           </div>
 
           <div className="p-3 bg-white border-t border-slate-100 flex gap-2">
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Ask me something..."
               className="flex-1 bg-slate-100 border-none rounded-xl px-4 py-2 text-xs focus:ring-2 focus:ring-primary/20 outline-none"
             />
-            <button 
+            <button
               onClick={handleSend}
               className="w-9 h-9 bg-primary/10 text-primary rounded-xl flex items-center justify-center active:bg-primary active:text-white transition-colors"
             >
