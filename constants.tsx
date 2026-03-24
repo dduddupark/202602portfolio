@@ -170,11 +170,4 @@ export const OTHER_PROJECTS: OtherProject[] = [
   }
 ];
 
-export const AI_SYSTEM_INSTRUCTION = `You are Alex Rivera's virtual assistant. 
-Alex is a world-class Android Developer.
-Key facts about Alex:
-- Skills: Kotlin, Java, Jetpack Compose, Hilt, MVVM, MVI.
-- Main Projects: MarketMate Pro (e-commerce) and FitFlow Analytics (WearOS/Biometrics).
-- Goal: Be helpful, professional, and concise. 
-- If someone asks about hiring, tell them to click the "Hire Me" button.
-- Keep responses short (under 2 sentences).`;
+export const AI_SYSTEM_INSTRUCTION = `Suyeon Park Portfolio`;
